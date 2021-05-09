@@ -19,9 +19,9 @@ Please follow the instructions below and fill in the information requested when 
 # Build/Run Instructions
 
 ## Build Instructions
-1. steps here
-2. steps here
+1. cd into the right directory ../csc317-termproject-dreydyl/application/
+2. Run npm install
 
 ## Run Instructions
-1. steps here
+1. Run npm start
 2. steps here 
