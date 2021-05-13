@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/form.css">
-    <title>Registration</title>
-    <script type="text/javascript" src="../js/registration.js"></script>
-</head>
-
 <body onload="setReqs()">
     <header>
         <h1>Registration Form</h1>
@@ -18,7 +6,7 @@
         <fieldset>
             <legend>Information</legend>
             <label>Username</label>
-            <input type="text" id="user" required/>
+            <input type="text" id="user" required />
             <ul id='userreqs'>
                 <li id="userlength">Username must consist of at least 3 letters and numbers</li>
                 <li id="startwchar">Username must start with a letter</li>
@@ -26,11 +14,11 @@
             <br />
 
             <label>Email</label>
-            <input type="email" required/>
+            <input type="email" required />
             <br />
 
             <label class="pw">Password</label>
-            <input type="password" class="inputpw" id="pass1" required/>
+            <input type="password" class="inputpw" id="pass1" required />
             <ul id='passreqs'>
                 <li id="passlength">Password must consist of at least 8 characters</li>
                 <li id="containsupper">Password must contain at least 1 uppercase letter</li>
@@ -41,18 +29,18 @@
             <br />
 
             <label class="pw">Confirm Password</label>
-            <input type="password" class="inputpw" id="pass2" required/>
+            <input type="password" class="inputpw" id="pass2" required />
             <ul id="passmat">
                 <li id="passmatches">Passwords must match</li>
             </ul>
             <br />
         </fieldset>
 
-        <input type="checkbox" id="old" required/>
+        <input type="checkbox" id="old" required />
         <label>I am 13 years old or older</label>
         <br />
 
-        <input type="checkbox" id="privacy" required/>
+        <input type="checkbox" id="privacy" required />
         <label>I accept TOS and Privacy Rules</label>
         <br />
         <a href="">TOS and Privacy Rules</a>
@@ -61,5 +49,3 @@
         <button type="submit">Register</button>
     </form>
 </body>
-
-</html>

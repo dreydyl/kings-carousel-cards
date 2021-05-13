@@ -3,6 +3,8 @@ body {
     color: #9f8870;
     padding-left: 55px;
     padding-right: 55px;
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 #container {
