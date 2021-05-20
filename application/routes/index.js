@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  next(new Error('test'));
+  // next(new Error('test'));
   res.render('index',{title:"Photo App"});
 });
 

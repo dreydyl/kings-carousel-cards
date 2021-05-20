@@ -9,6 +9,7 @@ var requestPrint = require('./helpers/debug/debugprinters').requestPrint;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var dbRouter = require('./routes/dbtest');
 
 var app = express();
 
@@ -42,5 +43,11 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/dbtest', dbRouter);
+
+app.use((err, req, res, next) => {
+    console.log(err);
+    res.render('error', {err_message: err});
+});
 
 module.exports = app;
