@@ -2,18 +2,19 @@
     <header>
         <h1>Login</h1>
     </header>
-    <form>
+    <form method="POST" action="/users/login" enctype="application/x-www-form-urlencoded">
         <fieldset>
             <legend>Info</legend>
             <label>Username</label>
-            <input type="text" />
+            <input type="text" name="username" required/>
             <br />
 
             <label class="pw">Password</label>
-            <input type="password" class="inputpw" />
+            <input type="password" class="inputpw" name="password" required/>
             <br />
-        </fieldset>
-
         <button type="submit">Login</button>
+
+        <div>Don't have an account? <a href="\registration">Register</a></div>
+        </fieldset>
     </form>
 </body>
