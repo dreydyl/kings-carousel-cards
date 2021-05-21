@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../config/database');
-var UserError = require('../helpers/error/UserError');
+const UserError = require('../helpers/error/UserError');
 const { successPrint, errorPrint } = require('../helpers/debug/debugprinters');
+var bcrypt = require('bcrypt');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -33,8 +34,7 @@ router.post('/register', (req,res,next) => {
   })
   .then(([results, fields]) => {
     if(results && results.length == 0) {
-      let baseSql = "INSERT INTO users (username, email, password, created) VALUES (?,?,?,now());";
-      return db.execute(baseSql, [username, email, password]);
+      return bcrypt.hash(password,15);
     } else {
       throw new UserError(
         "Registration Failed: Email already exists",
@@ -42,6 +42,10 @@ router.post('/register', (req,res,next) => {
         200
       );
     }
+  })
+  .then((hashedPassword) => {
+      let baseSql = "INSERT INTO users (username, email, password, created) VALUES (?,?,?,now());";
+      return db.execute(baseSql, [username, email, hashedPassword]);
   })
   .then(([results, fields]) => {
     if(results && results.affectedRows) {
@@ -75,15 +79,23 @@ router.post('/login',(req,res,next) => {
    * TODO validation
    */
 
-  let baseSql = "SELECT username, password FROM users WHERE username=? AND password=?";
-  db.execute(baseSql,[username,password])
+  let baseSql = "SELECT username, password FROM users WHERE username=?;";
+  db.execute(baseSql,[username])
   .then(([results, fields]) => {
-    if(results && results.length == 1){
+    if(results && results.length == 1) {
+      let hashedPassword = results[0].password;
+      return bcrypt.compare(password, hashedPassword);
+    } else {
+      throw new UserError("Invalid username and/or password", "/login", 200);
+    }
+  })
+  .then((passwordsMatched) => {
+    if(passwordsMatched){
       successPrint(`user ${username} is logged in`);
       res.locals.logged = true;
       res.render('index');
     } else {
-      throw new UserError("Invalid username and/or password", "/login", 200);
+      throw new UserError("invalid username and/or password", "/login", 200);
     }
   })
   .catch((err) => {

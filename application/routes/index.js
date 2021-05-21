@@ -19,8 +19,8 @@ router.get('/registration',(req, res, next) => {
   res.render('registration',{title:"Register"});
 });
 
-router.get('/imagepost',(req, res, next) => {
-  res.render('imagepost',{title:"Create a Post"});
+router.get('/postimage',(req, res, next) => {
+  res.render('postimage',{title:"Create a Post"});
 });
 
 module.exports = router;
