@@ -1,20 +1,19 @@
 <body>
-    <header>
-        <h1>Login</h1>
-    </header>
+    <h1>Login</h1>
     <form method="POST" action="/users/login" enctype="application/x-www-form-urlencoded">
-        <fieldset>
-            <legend>Info</legend>
-            <label>Username</label>
-            <input type="text" name="username" required/>
-            <br />
+        <div class="centered-flex">
+            <fieldset>
+                <label>Username</label>
+                <input type="text" name="username" required />
+                <br />
 
-            <label class="pw">Password</label>
-            <input type="password" class="inputpw" name="password" required/>
-            <br />
-        <button type="submit">Login</button>
+                <label class="pw">Password</label>
+                <input type="password" class="inputpw" name="password" required />
+                <br />
 
-        <div>Don't have an account? <a href="\registration">Register</a></div>
-        </fieldset>
+                <button type="submit">Log in</button>
+                <div id="register-prompt">Don't have an account? <a href="\registration">Register</a></div>
+            </fieldset>
+        </div>
     </form>
 </body>

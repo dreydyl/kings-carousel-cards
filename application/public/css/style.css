@@ -1,10 +1,75 @@
-body {
+html, body {
     background-color: #303043;
-    color: #ffd8b0;
-    padding-left: 55px;
-    padding-right: 55px;
-    padding: 50px;
+    margin: auto;
+    padding: 0;
+    width: 100%;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+header {
+    padding: 18px;
+}
+
+header, footer {
+    background-color: #282838;
+    color: #ffda6b;
+    margin: 0 auto;
+    overflow: hidden;
+    font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+footer {
+    font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
+    text-align: center;
+    padding: 10px;
+}
+
+body {
+    color: #f0f8ff;
+}
+
+#nav-bar {
+}
+
+.nav-item {
+    
+}
+
+#home-button {
+    border-radius: 16px;
+    border: 3.5px solid;
+    padding: 4px 6px;
+    float: left;
+    font-weight: bolder;
+}
+
+#search-text {
+    background-color: #323246;
+    color: #f0f8ff;
+    height: 1.75em;
+    border: 1px solid #55556e;
+    margin: 5px 0;
+    font: 12px "Times New Roman";
+}
+
+#right-align {
+    float: right;
+}
+
+.a-button {
+    border-radius: 4px;
+    border: 1px solid #ffda6b;
+    padding: 4px 6px;
+    text-decoration: none;
+}
+
+.a-button:visited {
+    color: #ffda6b;
+}
+
+.a-button:hover {
+    background-color: #ffda6b;
+    color: #282838;
 }
 
 #gallery-body {
@@ -46,17 +111,21 @@ body {
     margin: 20px auto auto auto;
 }
 
-.pw {
-    font: 1em georgia;
-}
-
-.inputpw {
-    border: 2px solid #55556e;
-}
-
 h1 {
     text-align: center;
-    font: 2em sans-serif;
+    color: #f0f8ff; 
+    font: 20px sans-serif;
+    font-weight: bold;
+}
+
+.centered-flex {
+    display: flex;
+    justify-content: center;
+}
+
+fieldset {
+    border-radius: 4px;
+    border: 1px solid #ffda6b;
 }
 
 ul {
@@ -83,12 +152,34 @@ fieldset input {
     margin: 5px 0;
 }
 
+.checkbox {
+    width: auto;
+}
+
+.check-field {
+    font-size: 12px;
+}
+
 button {
-    margin: 5px 0;
-    text-align: center;
-    background-color: #f0f8ff;
-    color: #323246;
-    display: inline-block;
+    background-color: #303043;
+    border: 1px solid #f0f8ff;
+    border-radius: 3px;
+    color: #f0f8ff;
+    padding: 4px 6px;
+    margin-top: 8px;
+    text-decoration: none;
+    float: left;
+}
+
+button:hover {
+    background-color: #3d310a;
+    border-color: #ffda6b;
+}
+
+#register-prompt {
+    float: right;
+    font-size: smaller;
+    margin-top: 18px;
 }
 
 a:link {
@@ -96,7 +187,7 @@ a:link {
 }
 
 a:visited {
-    color: #f8f8b0;
+    color: #e9d9a8;
 }
 
 a:hover {
@@ -109,4 +200,11 @@ a:hover {
     color: #f0f8ff;
     display: inline-block;
     border: 2px solid #55556e;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
 }
