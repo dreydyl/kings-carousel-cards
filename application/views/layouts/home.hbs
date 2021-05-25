@@ -10,23 +10,31 @@
     <script type="text/javascript" src="/public/js/frontendjs.js"></script>
 </head>
 
-{{> header}}
-{{{body}}}
+<div id="page-wrap">
+    {{log this}}
+    {{> header}}
+    {{#if (emptyObject messages)}}
+    {{> flashmessage}}
+    {{/if}}
+    {{{body}}}
+    <div id="push"></div>
+</div>
 {{> footer}}
 
 {{#if logged}}
-    <script>
-        let ele = document.getElementById("logout-button");
-        if(ele) {
-            ele.onclick = (even) => {
-                fetch('/users/logout', {
-                    method: "POST"
-                })
-                .then((data) => {
-                    location.replace('/');
-                });
-            }
+<script>
+    let ele = document.getElementById("logout-button");
+    if (ele) {
+        ele.onclick = (even) => {
+            fetch('/users/logout', {
+                method: "POST"
+            })
+            .then((data) => {
+                location.replace('/');
+            });
         }
-    </script>
+    }
+</script>
 {{/if}}
+
 </html>

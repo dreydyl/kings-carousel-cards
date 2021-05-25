@@ -5,6 +5,7 @@ var logger = require('morgan');
 var handlebars = require('express-handlebars');
 var sessions = require('express-session');
 var mysqlSession = require('express-mysql-session')(sessions);
+var flash = require('express-flash');
 
 var errorPrint = require('./helpers/debug/debugprinters').errorPrint;
 var requestPrint = require('./helpers/debug/debugprinters').requestPrint;
@@ -23,6 +24,9 @@ app.engine(
         extname: ".hbs",
         defaultLayout: "home",
         helpers: {
+            emptyObject: (obj) => {
+                return !(obj.constructor === Object && Object.keys(obj).length == 0);
+            }
             /**
              * if you need more helpers, add them here
              * key, value
@@ -40,6 +44,8 @@ app.use(sessions({
     resave: false,
     saveUninitialized: false
 }));
+
+app.use(flash());
 
 app.set("view engine", "hbs");
 app.use(logger('dev'));

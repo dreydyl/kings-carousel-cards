@@ -1,8 +1,8 @@
-function fadeOut(card,div) {
+function fadeOut(card, div) {
     //alert("clicked "+id+"!");
     var op = 1;
-    var timer = setInterval(function() {
-        if(op < 0.1){
+    var timer = setInterval(function () {
+        if (op < 0.1) {
             clearInterval(timer);
             div.removeChild(card);
             let count = div.childElementCount;
@@ -10,7 +10,7 @@ function fadeOut(card,div) {
                 = `There ${count == 1 ? "is" : "are"} ${count} photo${count == 1 ? "" : "s"} being shown`;
         }
         card.style.opacity = op;
-        op = op-0.075;
+        op = op - 0.075;
     }, 25);
 }
 
@@ -19,8 +19,8 @@ function createPhotoCard(data, containerDiv) {
     let div = document.createElement("div");
     div.className = "card";
     div.id = data.id;
-    div.addEventListener('click', function() {
-        fadeOut(div,containerDiv);
+    div.addEventListener('click', function () {
+        fadeOut(div, containerDiv);
     });
 
     let img = document.createElement("img");
@@ -41,17 +41,17 @@ function createPhotoCard(data, containerDiv) {
 
 function loadGallery() {
     let mainDiv = document.getElementById("container");
-    if(mainDiv) {
+    if (mainDiv) {
         let fetchURL = "https://jsonplaceholder.typicode.com/albums/2/photos";
         fetch(fetchURL)
-        .then((data) => data.json())
-        .then((photos) => {
-            let innerHTML = "";
-            photos.forEach((photo) => {
-                createPhotoCard(photo, mainDiv);
+            .then((data) => data.json())
+            .then((photos) => {
+                let innerHTML = "";
+                photos.forEach((photo) => {
+                    createPhotoCard(photo, mainDiv);
+                });
+                document.getElementById('items-count').innerHTML = `There are ${photos.length} photos being shown`;
             });
-            document.getElementById('items-count').innerHTML = `There are ${photos.length} photos being shown`;
-        });
     }
 }
 
@@ -61,22 +61,22 @@ function setReqs() {
     var userreqs = document.getElementById('userreqs');
     var req1 = document.getElementById('startwchar');
     var req2 = document.getElementById('userlength');
-    username.addEventListener("blur", function() {
+    username.addEventListener("blur", function () {
         var good = true;
-        if(!((username.value.charCodeAt() >= 65 && username.value.charCodeAt() <= 90)
+        if (!((username.value.charCodeAt() >= 65 && username.value.charCodeAt() <= 90)
             || (username.value.charCodeAt() >= 97 && username.value.charCodeAt() <= 122))) {
             req1.style.color = "#ce4646";
             good = false;
         } else {
             req1.style.color = "#c0c0e0";
         }
-        if(username.value.length < 3) {
+        if (username.value.length < 3) {
             req2.style.color = "#ce4646";
             good = false;
         } else {
             req2.style.color = "#c0c0e0";
         }
-        if(good) {
+        if (good) {
             userreqs.style.display = "none";
         } else {
             userreqs.style.display = "block";
@@ -90,52 +90,52 @@ function setReqs() {
     var req4 = document.getElementById('containsupper');
     var req5 = document.getElementById('containsnum');
     var req6 = document.getElementById('containsspec');
-    password.addEventListener("blur", function() {
+    password.addEventListener("blur", function () {
         var good = true;
         var hasUpper = false;
         var hasNum = false;
         var hasSpec = false;
-        for(var i = 0;i < password.value.length;i++) {
-            if(password.value.charAt(i) === password.value.charAt(i).toUpperCase()
+        for (var i = 0; i < password.value.length; i++) {
+            if (password.value.charAt(i) === password.value.charAt(i).toUpperCase()
                 && password.value.charAt(i) !== password.value.charAt(i).toLowerCase()) {
-                    hasUpper = true;
+                hasUpper = true;
             }
-            if(password.value.charCodeAt(i) >= 48 && password.value.charCodeAt(i) <= 57) {
+            if (password.value.charCodeAt(i) >= 48 && password.value.charCodeAt(i) <= 57) {
                 hasNum = true;
             }
-            if(password.value.charCodeAt(i) >= 33 && password.value.charCodeAt(i) <= 43
+            if (password.value.charCodeAt(i) >= 33 && password.value.charCodeAt(i) <= 43
                 && password.value.charCodeAt(i) != 34 && password.value.charCodeAt(i) != 39
                 || password.value.charAt(i) == '-' || password.value.charAt(i) == '/'
                 || password.value.charAt(i) == '@') {
-                    hasSpec = true;
+                hasSpec = true;
             }
         }
-        if(password.value.length < 8) {
+        if (password.value.length < 8) {
             req3.style.color = "#ce4646";
             good = false;
         } else {
             req3.style.color = "#c0c0e0";
         }
-        if(hasUpper) {
+        if (hasUpper) {
             req4.style.color = "#c0c0e0";
         } else {
             req4.style.color = "#ce4646";
             good = false;
         }
-        if(hasNum) {
+        if (hasNum) {
             req5.style.color = "#c0c0e0";
         } else {
             req5.style.color = "#ce4646";
             good = false;
         }
-        if(hasSpec) {
+        if (hasSpec) {
             req6.style.color = "#c0c0e0";
         } else {
             req6.style.color = "#ce4646";
             good = false;
         }
 
-        if(good) {
+        if (good) {
             passreqs.style.display = "none";
         } else {
             passreqs.style.display = "block";
@@ -145,8 +145,8 @@ function setReqs() {
     var confirmpass = document.getElementById('pass2');
     var passmat = document.getElementById('passmat');
     var req7 = document.getElementById('passmatches');
-    confirmpass.addEventListener("blur", function() {
-        if(password.value == confirmpass.value) {
+    confirmpass.addEventListener("blur", function () {
+        if (password.value == confirmpass.value) {
             passmat.style.display = "none";
             req7.style.color = "#c0c0e0";
         } else {
@@ -159,10 +159,10 @@ function checkForm(event) {
     var userreqs = document.getElementById('userreqs');
     var passreqs = document.getElementById('passreqs');
     var passmat = document.getElementById('passmat');
-    if(userreqs.style.display == "block" || passreqs.style.display == "block"
+    if (userreqs.style.display == "block" || passreqs.style.display == "block"
         || passmat.style.display == "block") {
-            event.preventDefault();
-            return false();
+        event.preventDefault();
+        return false();
     }
     return true;
 }

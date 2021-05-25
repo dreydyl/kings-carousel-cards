@@ -1,0 +1,25 @@
+<div id="flash-message">
+    <div class="alert-container">
+        {{#if messages.error}}
+        <div class="alert-back alert-danger"></div>
+        <div class="alert">{{messages.error}}</div>
+        {{else}}
+        <div class="alert-back alert-success"></div>
+        <div class="alert">{{messages.success}}</div>
+        {{/if}}
+    </div>
+</div>
+<script type="text/javascript">
+    var flashElement = document.getElementById('flash-message');
+    setTimeout(() => {
+        let currentOpacity = 1.0;
+        let timer = setInterval(() => {
+            if (currentOpacity < 0.05) {
+                clearInterval(timer);
+                flashElement.remove();
+            }
+            currentOpacity = currentOpacity - 0.05;
+            flashElement.style.opacity = currentOpacity;
+        }, 50);
+    }, 3000);
+</script>

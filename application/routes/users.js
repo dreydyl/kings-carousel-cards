@@ -5,11 +5,6 @@ const UserError = require('../helpers/error/UserError');
 const { successPrint, errorPrint } = require('../helpers/debug/debugprinters');
 var bcrypt = require('bcrypt');
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
-});
-
 router.post('/register', (req, res, next) => {
   let username = req.body.username;
   let email = req.body.email;
@@ -19,6 +14,50 @@ router.post('/register', (req, res, next) => {
   /**
    * TODO server side validation
    */
+  serverErr = new UserError(
+    "Registration Failed: Failed to meet requirements",
+    "/registration",
+    200
+  );
+  var good = true;
+  if (password != cpassword
+      || !((username.charCodeAt() >= 65 && username.charCodeAt() <= 90)
+      || (username.charCodeAt() >= 97 && username.charCodeAt() <= 122))
+      || username.length < 3) {
+      good = false;
+  }
+  var hasUpper = false;
+  var hasNum = false;
+  var hasSpec = false;
+  for (var i = 0; i < password.length; i++) {
+      if (password.charAt(i) === password.charAt(i).toUpperCase()
+          && password.charAt(i) !== password.charAt(i).toLowerCase()) {
+          hasUpper = true;
+      }
+      if (password.charCodeAt(i) >= 48 && password.charCodeAt(i) <= 57) {
+          hasNum = true;
+      }
+      if (password.charCodeAt(i) >= 33 && password.charCodeAt(i) <= 43
+          && password.charCodeAt(i) != 34 && password.charCodeAt(i) != 39
+          || password.charAt(i) == '-' || password.charAt(i) == '/'
+          || password.charAt(i) == '@') {
+          hasSpec = true;
+      }
+  }
+  if (password.length < 8
+      || !(hasUpper && hasNum && hasSpec)) {
+      good = false;
+  }
+
+  if(good) {
+    successPrint("passed server side validation");
+  } else {
+    errorPrint(serverErr.getMessage());
+    req.flash('error', serverErr.getMessage());
+    res.status(serverErr.getStatus());
+    res.redirect(serverErr.getRedirectURL());
+    return;
+  }
 
   db.execute("SELECT * FROM users WHERE username=?", [username])
     .then(([results, fields]) => {
@@ -50,6 +89,7 @@ router.post('/register', (req, res, next) => {
     .then(([results, fields]) => {
       if (results && results.affectedRows) {
         successPrint("User.js --> user was created!");
+        req.flash('success', 'User account has been made');
         res.redirect('/login');
       } else {
         throw new UserError(
@@ -63,6 +103,7 @@ router.post('/register', (req, res, next) => {
       errorPrint("user could not be made", err);
       if (err instanceof UserError) {
         errorPrint(err.getMessage());
+        req.flash('error', err.getMessage());
         res.status(err.getStatus());
         res.redirect(err.getRedirectURL());
       } else {
@@ -97,6 +138,7 @@ router.post('/login', (req, res, next) => {
         req.session.username = username;
         req.session.userId = userId;
         res.locals.logged = true;
+        req.flash('success', 'You have been successfully logged in');
         res.redirect("/");
       } else {
         throw new UserError("invalid username and/or password", "/login", 200);
@@ -106,6 +148,7 @@ router.post('/login', (req, res, next) => {
       errorPrint("user login failed");
       if (err instanceof UserError) {
         errorPrint(err.getMessage());
+        req.flash('error', err.getMessage());
         res.status(err.getStatus());
         res.redirect('/login');
       } else {
