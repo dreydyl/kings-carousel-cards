@@ -11,15 +11,23 @@
 </div>
 <script type="text/javascript">
     var flashElement = document.getElementById('flash-message');
+    let currentOpacity = 0.0;
+    let timer = setInterval(() => {
+        if (currentOpacity > 0.95) {
+            clearInterval(timer);
+        }
+        currentOpacity = currentOpacity + 0.075;
+        flashElement.style.opacity = currentOpacity;
+    }, 15);
     setTimeout(() => {
-        let currentOpacity = 1.0;
-        let timer = setInterval(() => {
+        currentOpacity = 1.0;
+        timer = setInterval(() => {
             if (currentOpacity < 0.05) {
                 clearInterval(timer);
                 flashElement.remove();
             }
-            currentOpacity = currentOpacity - 0.05;
+            currentOpacity = currentOpacity - 0.035;
             flashElement.style.opacity = currentOpacity;
         }, 50);
-    }, 3000);
+    }, 3500);
 </script>

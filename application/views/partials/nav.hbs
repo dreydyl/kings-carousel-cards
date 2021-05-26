@@ -1,16 +1,14 @@
-<header>
-    <nav id="nav-bar">
-        <a href="/" id="home-button" class="a-button nav-item">PHOTOBASE</a>
+<nav id="nav-bar">
+    <a href="/" id="home-button" class="a-button nav-item">PHOTOBASE</a>
 
-        <div id="right-align">
-            <input id="search-text" class="nav-item" name="search-name" type="text">
-            <i id="text-bar-icon" class="fa-search nav-item"></i>
-            <a href="/postimage" id="post-button" class="a-button nav-item">Post</a>
-            {{#if logged}}
-            <a id="logout-button" class="a-button nav-item">Log Out</a>
-            {{else}}
-            <a href="/login" id="auth-button" class="a-button nav-item">Log In</a>
-            {{/if}}
-        </div>
-    </nav>
-</header>
+    <div id="right-align">
+        <input id="search-text" class="nav-item" name="search-name" type="text">
+        <i id="text-bar-icon" class="fa-search nav-item"></i>
+        <a href="/postimage" id="post-button" class="a-button nav-item">Post</a>
+        {{#if logged}}
+        <a id="logout-button" class="a-button nav-item">Log Out</a>
+        {{else}}
+        <a href="/login" id="auth-button" class="a-button nav-item">Log In</a>
+        {{/if}}
+    </div>
+</nav>

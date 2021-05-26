@@ -12,7 +12,7 @@ var requestPrint = require('./helpers/debug/debugprinters').requestPrint;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var dbRouter = require('./routes/dbtest');
+var postsRouter = require('./routes/posts');
 
 var app = express();
 
@@ -69,7 +69,7 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/dbtest', dbRouter);
+app.use('/posts', postsRouter);
 
 app.use((err, req, res, next) => {
     console.log(err);

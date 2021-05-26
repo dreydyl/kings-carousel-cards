@@ -1,24 +1,22 @@
 <body>
     <h1>Post Image</h1>
-    <form>
+    <form id="post-image" method="POST" enctype="multipart/form-data" action="/posts/createPost">
         <div class="centered-flex">
             <fieldset>
                 <label>Title</label>
-                <input type="text" />
+                <input type="text" name="title" required/>
                 <br />
 
                 <label>Description</label>
-                <input type="text" />
+                <input type="text" name="description"/>
                 <br />
 
-                <p>
-                    <button type="submit" id="selectimage"><img>Select Image</button>
-                    <em>[image.jpg]</em>
-                </p>
+                <label>Select Image</label>
+                <input id="img-select" type="file" name="uploadImage" required />
                 <br />
 
                 <div class="check-field">
-                    <input type="checkbox" class="checkbox"/> I accept Acceptable Use Policy
+                    <input type="checkbox" class="checkbox"/> I accept <a href="">Acceptable Use Policy</a>
                 </div>
                 <br />
 

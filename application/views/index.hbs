@@ -1,4 +1,10 @@
-<body>
-    <h1 id="items-count">There are 0 items being shown</h1>
-    <div id="container"></div>
+<body id="main-content">
+    <h1>Recent Posts</h1>
+    <div class="centered-flex">
+        <div id="container">
+            {{#each results}}
+            {{> card this}}
+            {{/each}}
+        </div>
+    </div>
 </body>

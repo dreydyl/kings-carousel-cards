@@ -11,9 +11,6 @@ router.post('/register', (req, res, next) => {
   let password = req.body.password;
   let cpassword = req.body.cpassword;
 
-  /**
-   * TODO server side validation
-   */
   serverErr = new UserError(
     "Registration Failed: Failed to meet requirements",
     "/registration",
@@ -56,7 +53,6 @@ router.post('/register', (req, res, next) => {
     req.flash('error', serverErr.getMessage());
     res.status(serverErr.getStatus());
     res.redirect(serverErr.getRedirectURL());
-    return;
   }
 
   db.execute("SELECT * FROM users WHERE username=?", [username])
@@ -116,9 +112,19 @@ router.post('/login', (req, res, next) => {
   let username = req.body.username;
   let password = req.body.password;
 
-  /**
-   * TODO validation
-   */
+  serverErr = new UserError(
+    "Login Failed: missing info",
+    "/registration",
+    200
+  );
+  if(username.length == 0 || password.length == 0) {
+    errorPrint(serverErr.getMessage());
+    req.flash('error', serverErr.getMessage());
+    res.status(serverErr.getStatus());
+    res.redirect(serverErr.getRedirectURL());
+  } else {
+    successPrint("passed server side validation");
+  }
 
   let baseSql = "SELECT id, username, password FROM users WHERE username=?;";
   let userId;

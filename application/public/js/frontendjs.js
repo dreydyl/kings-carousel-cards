@@ -26,8 +26,6 @@ function createPhotoCard(data, containerDiv) {
     let img = document.createElement("img");
     img.src = data.url;
     img.className = "image";
-    // img.style.maxWidth = "100%";
-    // img.style.maxHeight = "100%";
 
     let title = document.createElement("div");
     title.innerHTML = data.title;
