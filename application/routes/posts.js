@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var getRecentPosts = require('../middleware/postmiddleware').getRecentPosts;
-var db = require('../config/database');
 const { successPrint, errorPrint } = require('../helpers/debug/debugprinters');
 var sharp = require('sharp');
 var multer = require('multer');
 var crypto = require('crypto');
 var PostError = require('../helpers/error/PostError');
+var PostModel = require('../models/Posts');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -30,11 +30,11 @@ router.post('/createPost', uploader.single("uploadImage"), (req, res, next) => {
     let userid = req.session.userId;
 
     serverErr = new PostError(
-        "Registration Failed: Failed to meet requirements",
+        "Upload Failed: Missing fields",
         "/registration",
         200
     );
-    if(title.length == 0 || description.length == 0 || userid == 0) {
+    if (title.length == 0 || description.length == 0 || userid == 0) {
         errorPrint(serverErr.getMessage());
         req.flash('error', serverErr.getMessage());
         res.status(serverErr.getStatus());
@@ -44,64 +44,53 @@ router.post('/createPost', uploader.single("uploadImage"), (req, res, next) => {
     }
 
     sharp(fileUploaded)
-    .resize(200)
-    .toFile(destinationOfThumbnail)
-    .then(() => {
-        let baseSql = 'INSERT INTO posts (title, description, photopath, thumbnail, created, userid) VALUE (?, ?, ?, ?, now(), ?);';
-        return db.execute(baseSql, [title, description, fileUploaded, destinationOfThumbnail, userid]);
-    })
-    .then(([results, fields]) => {
-        if(results && results.affectedRows) {
-            req.flash('success', 'Your post was created successfully');
-            //res.redirect('/');
-            res.redirect('/post/'+results.insertId); //destination of new post
-        } else {
-            throw new PostError('Post could not be created', 'postImage', 200);
-        }
-    })
-    .catch((err) => {
-        if(err instanceof PostError) {
-            errorPrint(err.getMessage());
-            req.flash('error', err.getMessage());
-            res.status(err.getStatus());
-            res.redirect(err.getRedirectURL());
-        } else {
-            next(err);
-        }
-    })
+        .resize(200)
+        .toFile(destinationOfThumbnail)
+        .then(() => {
+            return PostModel.create(title, description, fileUploaded, destinationOfThumbnail, userid);
+        })
+        .then((results) => {
+            if (results && results.affectedRows) {
+                req.flash('success', 'Your post was created successfully');
+                res.redirect('/post/' + results.insertId); //destination of new post
+            } else {
+                throw new PostError('Post could not be created', 'postImage', 200);
+            }
+        })
+        .catch((err) => {
+            if (err instanceof PostError) {
+                errorPrint(err.getMessage());
+                req.flash('error', err.getMessage());
+                res.status(err.getStatus());
+                res.redirect(err.getRedirectURL());
+            } else {
+                next(err);
+            }
+        })
 });
 
-router.get('/search', (req, res, next) => {
+router.get('/search', async (req, res, next) => {
     let searchTerm = req.query.search;
-    if(!searchTerm) {
+    if (!searchTerm) {
         res.send({
             resultsStatus: "info",
             message: "No search term given",
             results: []
         });
     } else {
-        let baseSql = "SELECT id, title, description, thumbnail, concat_ws(' ', title, description) AS haystack \
-        FROM posts \
-        HAVING haystack like ?;";
-
-        let sqlReadySearchTerm = "%"+searchTerm+"%";
-
-        db.execute(baseSql, [sqlReadySearchTerm])
-        .then(([results, fields]) => {
-            if(results && results.length) {
-                req.flash('success', `${results.length} result${results.length == 1 ? ``: `s`} found`);
-                res.locals.results = results;
-                results.forEach(row => {
-                    row.thumbnail = "../" + row.thumbnail;
-                });
-                res.render('index',{title:"PhotoBase "+searchTerm, header:"Results"});
-            } else {
-                errorPrint('no results');
-                req.flash('error','No results were found for your search');
-                res.redirect('/');
-            }
-        })
-        .catch((err) => next(err));
+        let results = await PostModel.search(searchTerm);
+        if (results.length) {
+            req.flash('success', `${results.length} result${results.length == 1 ? `` : `s`} found`);
+            res.locals.results = results;
+            results.forEach(row => {
+                row.thumbnail = "../" + row.thumbnail;
+            });
+            res.render('index', { title: "PhotoBase " + searchTerm, header: "Results" });
+        } else {
+            errorPrint('no results');
+            req.flash('error', 'No results were found for your search');
+            res.redirect('/');
+        }
         // db.execute(baseSql, [sqlReadySearchTerm])
         // .then(([results, fields]) => {
         //     if(results && results.length) {
