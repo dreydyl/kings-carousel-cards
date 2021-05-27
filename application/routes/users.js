@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../config/database');
+const UserModel = require('../models/Users');
 const UserError = require('../helpers/error/UserError');
 const { successPrint, errorPrint } = require('../helpers/debug/debugprinters');
-var bcrypt = require('bcrypt');
+// var bcrypt = require('bcrypt');
 
 router.post('/register', (req, res, next) => {
   let username = req.body.username;
@@ -18,35 +19,35 @@ router.post('/register', (req, res, next) => {
   );
   var good = true;
   if (password != cpassword
-      || !((username.charCodeAt() >= 65 && username.charCodeAt() <= 90)
+    || !((username.charCodeAt() >= 65 && username.charCodeAt() <= 90)
       || (username.charCodeAt() >= 97 && username.charCodeAt() <= 122))
-      || username.length < 3) {
-      good = false;
+    || username.length < 3) {
+    good = false;
   }
   var hasUpper = false;
   var hasNum = false;
   var hasSpec = false;
   for (var i = 0; i < password.length; i++) {
-      if (password.charAt(i) === password.charAt(i).toUpperCase()
-          && password.charAt(i) !== password.charAt(i).toLowerCase()) {
-          hasUpper = true;
-      }
-      if (password.charCodeAt(i) >= 48 && password.charCodeAt(i) <= 57) {
-          hasNum = true;
-      }
-      if (password.charCodeAt(i) >= 33 && password.charCodeAt(i) <= 43
-          && password.charCodeAt(i) != 34 && password.charCodeAt(i) != 39
-          || password.charAt(i) == '-' || password.charAt(i) == '/'
-          || password.charAt(i) == '@') {
-          hasSpec = true;
-      }
+    if (password.charAt(i) === password.charAt(i).toUpperCase()
+      && password.charAt(i) !== password.charAt(i).toLowerCase()) {
+      hasUpper = true;
+    }
+    if (password.charCodeAt(i) >= 48 && password.charCodeAt(i) <= 57) {
+      hasNum = true;
+    }
+    if (password.charCodeAt(i) >= 33 && password.charCodeAt(i) <= 43
+      && password.charCodeAt(i) != 34 && password.charCodeAt(i) != 39
+      || password.charAt(i) == '-' || password.charAt(i) == '/'
+      || password.charAt(i) == '@') {
+      hasSpec = true;
+    }
   }
   if (password.length < 8
-      || !(hasUpper && hasNum && hasSpec)) {
-      good = false;
+    || !(hasUpper && hasNum && hasSpec)) {
+    good = false;
   }
 
-  if(good) {
+  if (good) {
     successPrint("passed server side validation");
   } else {
     errorPrint(serverErr.getMessage());
@@ -55,44 +56,38 @@ router.post('/register', (req, res, next) => {
     res.redirect(serverErr.getRedirectURL());
   }
 
-  db.execute("SELECT * FROM users WHERE username=?", [username])
-    .then(([results, fields]) => {
-      if (results && results.length == 0) {
-        return db.execute("SELECT * FROM users WHERE email=?", [email]);
-      } else {
+  UserModel.usernameExists(username)
+    .then((usernameDoesExist) => {
+      if (usernameDoesExist) {
         throw new UserError(
           "Registration Failed: Username already exists",
           "/registration",
-          200
-        );
+          200);
+      } else {
+        return UserModel.emailExists(email)
       }
     })
-    .then(([results, fields]) => {
-      if (results && results.length == 0) {
-        return bcrypt.hash(password, 15);
-      } else {
+    .then((emailDoesExist) => {
+      if (emailDoesExist) {
         throw new UserError(
           "Registration Failed: Email already exists",
           "/registration",
-          200
-        );
+          200);
+      } else {
+        return UserModel.create(username, password, email);
       }
     })
-    .then((hashedPassword) => {
-      let baseSql = "INSERT INTO users (username, email, password, created) VALUES (?,?,?,now());";
-      return db.execute(baseSql, [username, email, hashedPassword]);
-    })
-    .then(([results, fields]) => {
-      if (results && results.affectedRows) {
-        successPrint("User.js --> user was created!");
-        req.flash('success', 'User account has been made');
-        res.redirect('/login');
-      } else {
+    .then((createdUserId) => {
+      if (createdUserId < 0) {
         throw new UserError(
           "Server Error: User could not be created",
           "/registration",
           500
         );
+      } else {
+        successPrint("User.js --> user was created!");
+        req.flash('success', 'User account has been made');
+        res.redirect('/login');
       }
     })
     .catch((err) => {
@@ -117,7 +112,7 @@ router.post('/login', (req, res, next) => {
     "/registration",
     200
   );
-  if(username.length == 0 || password.length == 0) {
+  if (username.length == 0 || password.length == 0) {
     errorPrint(serverErr.getMessage());
     req.flash('error', serverErr.getMessage());
     res.status(serverErr.getStatus());
@@ -126,23 +121,12 @@ router.post('/login', (req, res, next) => {
     successPrint("passed server side validation");
   }
 
-  let baseSql = "SELECT id, username, password FROM users WHERE username=?;";
-  let userId;
-  db.execute(baseSql, [username])
-    .then(([results, fields]) => {
-      if (results && results.length == 1) {
-        let hashedPassword = results[0].password;
-        userId = results[0].id;
-        return bcrypt.compare(password, hashedPassword);
-      } else {
-        throw new UserError("Invalid username and/or password", "/login", 200);
-      }
-    })
-    .then((passwordsMatched) => {
-      if (passwordsMatched) {
+  UserModel.authenticate(username, password)
+    .then((loggedUserId) => {
+      if (loggedUserId > 0) {
         successPrint(`user ${username} is logged in`);
         req.session.username = username;
-        req.session.userId = userId;
+        req.session.userId = loggedUserId;
         res.locals.logged = true;
         req.flash('success', 'You have been successfully logged in');
         res.redirect("/");
@@ -165,13 +149,13 @@ router.post('/login', (req, res, next) => {
 
 router.post('/logout', (req, res, next) => {
   req.session.destroy((err) => {
-    if(err) {
+    if (err) {
       errorPrint("session could not be destroyed");
       next(err);
     } else {
       successPrint("session was destroyed");
       res.clearCookie('csid');
-      res.json({status:"OK", message:"user is logged out"});
+      res.json({ status: "OK", message: "user is logged out" });
     }
   });
 });

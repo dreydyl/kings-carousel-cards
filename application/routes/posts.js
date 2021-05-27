@@ -53,7 +53,8 @@ router.post('/createPost', uploader.single("uploadImage"), (req, res, next) => {
     .then(([results, fields]) => {
         if(results && results.affectedRows) {
             req.flash('success', 'Your post was created successfully');
-            res.redirect('/'); //destination of new post
+            //res.redirect('/');
+            res.redirect('/post/'+results.insertId); //destination of new post
         } else {
             throw new PostError('Post could not be created', 'postImage', 200);
         }
@@ -90,6 +91,9 @@ router.get('/search', (req, res, next) => {
             if(results && results.length) {
                 req.flash('success', `${results.length} result${results.length == 1 ? ``: `s`} found`);
                 res.locals.results = results;
+                results.forEach(row => {
+                    row.thumbnail = "../" + row.thumbnail;
+                });
                 res.render('index',{title:"PhotoBase "+searchTerm, header:"Results"});
             } else {
                 errorPrint('no results');
