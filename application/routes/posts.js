@@ -1,13 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var getRecentPosts = require('../middleware/postmiddleware').getRecentPosts;
 var db = require('../config/database');
 const { successPrint, errorPrint } = require('../helpers/debug/debugprinters');
 var sharp = require('sharp');
 var multer = require('multer');
 var crypto = require('crypto');
 var PostError = require('../helpers/error/PostError');
-const { fileURLToPath } = require('url');
-const { post } = require('../app');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -69,6 +68,58 @@ router.post('/createPost', uploader.single("uploadImage"), (req, res, next) => {
             next(err);
         }
     })
+});
+
+router.get('/search', (req, res, next) => {
+    let searchTerm = req.query.search;
+    if(!searchTerm) {
+        res.send({
+            resultsStatus: "info",
+            message: "No search term given",
+            results: []
+        });
+    } else {
+        let baseSql = "SELECT id, title, description, thumbnail, concat_ws(' ', title, description) AS haystack \
+        FROM posts \
+        HAVING haystack like ?;";
+
+        let sqlReadySearchTerm = "%"+searchTerm+"%";
+
+        db.execute(baseSql, [sqlReadySearchTerm])
+        .then(([results, fields]) => {
+            if(results && results.length) {
+                req.flash('success', `${results.length} result${results.length == 1 ? ``: `s`} found`);
+                res.locals.results = results;
+                res.render('index',{title:"PhotoBase "+searchTerm, header:"Results"});
+            } else {
+                errorPrint('no results');
+                req.flash('error','No results were found for your search');
+                res.redirect('/');
+            }
+        })
+        .catch((err) => next(err));
+        // db.execute(baseSql, [sqlReadySearchTerm])
+        // .then(([results, fields]) => {
+        //     if(results && results.length) {
+        //         res.send({
+        //             resultsStatus: "info",
+        //             message: `${results.length} result${results.length == 1 ? "": "s"} found`,
+        //             results: results
+        //         });
+        //     } else {
+        //         errorPrint('no results');
+        //         db.query('SELECT id, title, description, thumbnail CREATED FROM posts ORDER BY created LIMIT 12;', [])
+        //         .then(([results, fields]) => {
+        //             res.send({
+        //                 resultsStatus: "info",
+        //                 message: "No results were found for your search but here are the 8 most recent posts",
+        //                 results: results
+        //             });
+        //         });
+        //     }
+        // })
+        // .catch((err) => next(err));
+    }
 });
 
 module.exports = router;

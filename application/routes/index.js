@@ -6,24 +6,24 @@ var db = require('../config/database');
 
 /* GET home page. */
 router.get('/', getRecentPosts, function(req, res, next) {
-  res.render('index',{title:"Photo App"});
+  res.render('index',{title:"PhotoBase", header:"Recent Posts"});
 });
 
 router.get('/gallery', function(req, res, next) {
-  res.render('gallery',{title:"Gallery"});
+  res.render('gallery',{title:"PhotoBase Gallery"});
 });
 
 router.get('/login',(req, res, next) => {
-  res.render('login',{title:"Login"});
+  res.render('login',{title:"PhotoBase Login"});
 });
 
 router.get('/registration',(req, res, next) => {
-  res.render('registration',{title:"Register"});
+  res.render('registration',{title:"PhotoBase Register"});
 });
 
 router.use('/postimage', isLoggedIn);
 router.get('/postimage',(req, res, next) => {
-  res.render('postimage',{title:"Create a Post"});
+  res.render('postimage',{title:"PhotoBase Create a Post"});
 });
 
 router.get('/post/:id(\\d+)', (req, res, next) => {

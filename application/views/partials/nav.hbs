@@ -2,8 +2,8 @@
     <a href="/" id="home-button" class="a-button nav-item">PHOTOBASE</a>
 
     <div id="right-align">
-        <input id="search-text" class="nav-item" name="search-name" type="text">
-        <i id="text-bar-icon" class="fa-search nav-item"></i>
+        <input id="search-text" class="nav-item" name="search-name" type="text" placeholder="search...">
+        <i id="search-button" class="a-button fa-search nav-item">search</i>
         <a href="/postimage" id="post-button" class="a-button nav-item">Post</a>
         {{#if logged}}
         <a id="logout-button" class="a-button nav-item">Log Out</a>
@@ -12,3 +12,68 @@
         {{/if}}
     </div>
 </nav>
+
+<script>
+    function addFlashFromFrontEnd(message) {
+        let flashMessageDiv = document.createElement('div');
+        let innerAlertDiv = document.createElement('div');
+        let innerFlashBack = document.createElement('div');
+        let innerFlashDiv = document.createElement('div');
+        let innerTextNode = document.createTextNode(message);
+        innerFlashDiv.appendChild(innerTextNode);
+        innerAlertDiv.appendChild(innerFlashBack);
+        innerAlertDiv.appendChild(innerFlashDiv);
+        flashMessageDiv.appendChild(innerAlertDiv);
+        flashMessageDiv.setAttribute('id', 'flash-message');
+        innerAlertDiv.setAttribute('class', 'alert-container');
+        innerFlashBack.setAttribute('class', 'alert-back alert-neutral');
+        innerFlashDiv.setAttribute('class', 'alert');
+        document.getElementsByTagName('body')[0].appendChild(flashMessageDiv);
+    }
+
+    function createCard(postData) {
+        return `<a href="/post/${postData.id}" class="post-anchor">
+                    <div id="post-${postData.id}" class="card">
+                        <img class="image" src="${postData.thumbnail}" alt="Missing Image" />
+                        <div class="card-info">
+                            <div id="card-title">${postData.title}</div>
+
+                            ${postData.description}
+                            </br>
+                        </div>
+                    </div>
+                </a>`;
+    }
+    function executeSearch() {
+        let searchTerm = document.getElementById('search-text').value;
+        if (!searchTerm) {
+            location.replace('/');
+            return;
+        }
+        let mainContent = document.getElementById('container');
+        let searchURL = `/posts/search?search=${searchTerm}`;
+
+        location.replace(searchURL);
+
+        /*fetch(searchURL)
+            .then((data) => {
+                return data.json();
+            })
+            .then((data_json) => {
+                let newMainContentHTML = '';
+                data_json.results.forEach((row) => {
+                    newMainContentHTML += createCard(row);
+                });
+                mainContent.innerHTML = newMainContentHTML;
+                if(data_json.message) {
+                    addFlashFromFrontEnd(data_json.message);
+                }
+            }) 
+            .catch((err) => console.log(err));*/
+    }
+
+    let searchButton = document.getElementById('search-button');
+    if (searchButton) {
+        searchButton.onclick = executeSearch;
+    }
+</script>

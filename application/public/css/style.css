@@ -60,6 +60,13 @@ body {
     color: #ffda6b;
 }
 
+#search-button {
+    border-radius: 0px 4px 4px 0px;
+    height: 1.75em;
+    font-size: 12px;
+    cursor: pointer;
+}
+
 #search-text {
     background-color: #323246;
     color: #f0f8ff;
@@ -104,6 +111,7 @@ body {
     gap: .5em;
     margin-bottom: 20px;
     width: 90%;
+    justify-content: left;
 }
 
 .image {
@@ -121,7 +129,7 @@ body {
     /* border-color: #9f9470; */
     border-color: #28283b;
     opacity: 1;
-    min-width: 200px;
+    width: 200px;
 }
 
 .title {
@@ -303,6 +311,10 @@ a:hover {
     background-color: #10f010;
 }
 
+.alert-neutral {
+    background-color: #10f0f0;
+}
+
 #flash-message {
     opacity: 0%;
     position: fixed;
@@ -310,6 +322,7 @@ a:hover {
     top: 4%;
     border-radius: 4px;
     transform: translate(-50%, 0);
+    z-index: 10;
 }
 
 #flash-message div {
