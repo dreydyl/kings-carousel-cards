@@ -185,15 +185,40 @@ body {
 }
 
 div[id^=message-] {
-    border: 1px solid #a88f44;
+    border: 0.8px solid #3d4042;
+    border-radius: 2px;
     margin: 2px;
+}
+
+.date-posted {
+    font-size: smaller;
+    opacity: 60%;
+}
+
+.comment-author {
+    color: #ffda6b;
+}
+
+#comment-box {
+    padding-top: 10px;
+    width: 100%;
+}
+
+#comment-box-text {
+    width: 80%;
+    height: 40px;
 }
 
 #comment-button {
     border-color: #a88f44;
-    border-radius: 0px 4px 4px 0px;
+    border-radius: 3px;
     font-style: normal;
     cursor: pointer;
+    float: right;
+    min-width: 10%;
+    max-width: 20%;
+    margin-bottom: 100px;
+    text-align: center;
 }
 
 #comment-button:hover {

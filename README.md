@@ -24,4 +24,3 @@ Please follow the instructions below and fill in the information requested when 
 
 ## Run Instructions
 1. Run npm start
-2. steps here 
