@@ -53,6 +53,23 @@ function loadGallery() {
     }
 }
 
+function addFlashFromFrontEnd(message) {
+    let flashMessageDiv = document.createElement('div');
+    let innerAlertDiv = document.createElement('div');
+    let innerFlashBack = document.createElement('div');
+    let innerFlashDiv = document.createElement('div');
+    let innerTextNode = document.createTextNode(message);
+    innerFlashDiv.appendChild(innerTextNode);
+    innerAlertDiv.appendChild(innerFlashBack);
+    innerAlertDiv.appendChild(innerFlashDiv);
+    flashMessageDiv.appendChild(innerAlertDiv);
+    flashMessageDiv.setAttribute('id', 'flash-message');
+    innerAlertDiv.setAttribute('class', 'alert-container');
+    innerFlashBack.setAttribute('class', 'alert-back alert-neutral');
+    innerFlashDiv.setAttribute('class', 'alert');
+    document.getElementsByTagName('body')[0].appendChild(flashMessageDiv);
+}
+
 function setReqs() {
     var username = document.getElementById('user');
 
