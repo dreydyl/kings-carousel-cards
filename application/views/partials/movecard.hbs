@@ -1,0 +1,149 @@
+<div class="card-flex">
+    <div id="carcard">
+        <div id="cartitle">
+            <em id="character">
+                {{character}}
+            </em>
+            <em id="value">
+                {{tier}}
+            </em>
+        </div>
+        <div id="rangeview">
+            <div id="left-arrow" style="opacity: {{#if (greaterThan 6 distance)}}100%{{else}}0%{{/if}}">
+                <div id="left-point"></div>
+                <div id="left-line"></div>
+            </div>
+            <div id="right-arrow" style="opacity: {{#if (greaterThan distance 6)}}100%{{else}}0%{{/if}}">
+                <div id="right-point"></div>
+                <div id="right-line"></div>
+            </div>
+            <div id="range">
+                <div id="inner-range"></div>
+                <div class="pie">
+                    <div id="slice6">
+                        <button style="transform: rotate(-15deg) skewY(-60deg)
+                            {{#if (distanceMatches 6 distance)}}; background-color: #00e1ff5f; border-color: #00e1ff5f; z-index: 6{{/if}}">
+                        </button>
+                        <button style="transform: rotate(-15deg) skewY(-60deg);
+                            {{#if (distanceMatches 6 distance)}} z-index: 5;{{/if}}">
+                            <span style="transform: skewY(60deg) rotate(15deg)" class="text">6</span>
+                        </button>
+                    </div>
+                    <div id="slice7">
+                        <button style="transform: rotate(15deg) skewY(-60deg)
+                            {{#if (distanceMatches 7 distance)}}; background-color: #00e1ff5f; border-color: #00e1ff5f; z-index: 6{{/if}}">
+                        </button>
+                        <button style="transform: rotate(15deg) skewY(-60deg);
+                            {{#if (distanceMatches 7 distance)}} z-index: 5;{{/if}}">
+                            <span style="transform: skewY(60deg) rotate(-15deg)" class="text">7</span>
+                        </button>
+                    </div>
+                    <div id="slice8">
+                        <button style="transform: rotate(45deg) skewY(-60deg)
+                            {{#if (distanceMatches 8 distance)}}; background-color: #00e1ff5f; border-color: #00e1ff5f; z-index: 6{{/if}}">
+                        </button>
+                        <button style="transform: rotate(45deg) skewY(-60deg);
+                            {{#if (distanceMatches 8 distance)}} z-index: 5;{{/if}}">
+                            <span style="transform: skewY(60deg) rotate(-45deg)" class="text">8</span>
+                        </button>
+                    </div>
+                    <div id="slice9">
+                        <button style="transform: rotate(75deg) skewY(-60deg)
+                            {{#if (distanceMatches 9 distance)}}; background-color: #00e1ff5f; border-color: #00e1ff5f; z-index: 6{{/if}}">
+                        </button>
+                        <button style="transform: rotate(75deg) skewY(-60deg);
+                            {{#if (distanceMatches 9 distance)}} z-index: 5;{{/if}}">
+                            <span style="transform: skewY(60deg) rotate(-75deg)" class="text">9</span>
+                        </button>
+                    </div>
+                    <div id="slice10">
+                        <button style="transform: rotate(105deg) skewY(-60deg)
+                            {{#if (distanceMatches 10 distance)}}; background-color: #00e1ff5f; border-color: #00e1ff5f; z-index: 6{{/if}}">
+                        </button>
+                        <button style="transform: rotate(105deg) skewY(-60deg);
+                            {{#if (distanceMatches 10 distance)}} z-index: 5;{{/if}}">
+                            <span style="transform: skewY(60deg) rotate(-105deg)" class="text">10</span>
+                        </button>
+                    </div>
+                    <div id="slice11">
+                        <button style="transform: rotate(135deg) skewY(-60deg)
+                            {{#if (distanceMatches 11 distance)}}; background-color: #00e1ff5f; border-color: #00e1ff5f; z-index: 6{{/if}}">
+                        </button>
+                        <button style="transform: rotate(135deg) skewY(-60deg);
+                            {{#if (distanceMatches 11 distance)}} z-index: 5;{{/if}}">
+                            <span style="transform: skewY(60deg) rotate(-135deg)" class="text">11</span>
+                        </button>
+                    </div>
+                    <div id="slice0">
+                        <button style="transform: rotate(165deg) skewY(-60deg)
+                            {{#if (distanceMatches 0 distance)}}; background-color: #00e1ff5f; border-color: #00e1ff5f; z-index: 6{{/if}}">
+                        </button>
+                        <button style="transform: rotate(165deg) skewY(-60deg);
+                            {{#if (distanceMatches 0 distance)}} z-index: 5;{{/if}}">
+                            <span style="transform: skewY(60deg) rotate(-165deg)" class="text">0</span>
+                        </button>
+                    </div>
+                    <div id="slice1">
+                        <button style="transform: rotate(195deg) skewY(-60deg)
+                            {{#if (distanceMatches 1 distance)}}; background-color: #00e1ff5f; border-color: #00e1ff5f; z-index: 6{{/if}}">
+                        </button>
+                        <button style="transform: rotate(195deg) skewY(-60deg);
+                            {{#if (distanceMatches 1 distance)}} z-index: 5;{{/if}}">
+                            <span style="transform: skewY(60deg) rotate(-195deg)" class="text">1</span>
+                        </button>
+                    </div>
+                    <div id="slice2">
+                        <button style="transform: rotate(225deg) skewY(-60deg)
+                            {{#if (distanceMatches 2 distance)}}; background-color: #00e1ff5f; border-color: #00e1ff5f; z-index: 6{{/if}}">
+                        </button>
+                        <button style="transform: rotate(225deg) skewY(-60deg);
+                            {{#if (distanceMatches 2 distance)}} z-index: 5;{{/if}}">
+                            <span style="transform: skewY(60deg) rotate(-225deg)" class="text">2</span>
+                        </button>
+                    </div>
+                    <div id="slice3">
+                        <button style="transform: rotate(255deg) skewY(-60deg)
+                            {{#if (distanceMatches 3 distance)}}; background-color: #00e1ff5f; border-color: #00e1ff5f; z-index: 6{{/if}}">
+                        </button>
+                        <button style="transform: rotate(255deg) skewY(-60deg);
+                            {{#if (distanceMatches 3 distance)}} z-index: 5;{{/if}}">
+                            <span style="transform: skewY(60deg) rotate(-255deg)" class="text">3</span>
+                        </button>
+                    </div>
+                    <div id="slice4">
+                        <button style="transform: rotate(285deg) skewY(-60deg)
+                            {{#if (distanceMatches 4 distance)}}; background-color: #00e1ff5f; border-color: #00e1ff5f; z-index: 6{{/if}}">
+                        </button>
+                        <button style="transform: rotate(285deg) skewY(-60deg);
+                            {{#if (distanceMatches 4 distance)}} z-index: 5;{{/if}}">
+                            <span style="transform: skewY(60deg) rotate(-285deg)" class="text">4</span>
+                        </button>
+                    </div>
+                    <div id="slice5">
+                        <button style="transform: rotate(315deg) skewY(-60deg)
+                            {{#if (distanceMatches 5 distance)}}; background-color: #00e1ff5f; border-color: #00e1ff5f; z-index: 6{{/if}}">
+                        </button>
+                        <button style="transform: rotate(315deg) skewY(-60deg);
+                            {{#if (distanceMatches 5 distance)}} z-index: 5;{{/if}}">
+                            <span style="transform: skewY(60deg) rotate(-315deg)" class="text">5</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="description-field">
+            <div id="description-info">
+                <div id="card-name">
+                    {{name}}
+                </div>
+                <div id="ig-range">
+                    {{igDistance}}
+                </div>
+            </div>
+            <div id="description">
+                {{description}}
+            </div>
+        </div>
+    </div>
+    <div id="color-correcter" style="background-color: {{getFamilyFilter family}};"></div>
+</div>

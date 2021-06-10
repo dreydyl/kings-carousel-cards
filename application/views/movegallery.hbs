@@ -1,0 +1,9 @@
+<body {{!-- onload="loadGallery()" --}} id="gallery-body">
+    <div class="centered-flex">
+        <div id="container">
+            {{#each results}}
+            {{> movecard this}}
+            {{/each}}
+        </div>
+    </div>
+</body>

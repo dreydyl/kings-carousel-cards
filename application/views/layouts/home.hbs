@@ -11,15 +11,14 @@
 </head>
 
 <div id="page-wrap">
-    {{log this}}
-    {{> header}}
+    {{!-- {{> header}}
     {{#if (emptyObject messages)}}
     {{> flashmessage}}
-    {{/if}}
+    {{/if}} --}}
     {{{body}}}
-    <div id="push"></div>
+    {{!-- <div id="push"></div> --}}
 </div>
-{{> footer}}
+{{!-- {{> footer}} --}}
 
 {{#if logged}}
 <script>

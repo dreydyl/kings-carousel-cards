@@ -1,0 +1,34 @@
+{
+    "Abilities": [
+        {
+            "id": "0",
+            "name": "none",
+            "ig_name": "none",
+            "description": "none"
+        },
+        {
+            "id": "1",
+            "name": "purity",
+            "ig_name": "Purity",
+            "description": "Damage counters of all effects against this unit are increased by 3."
+        },
+        {
+            "id": "2",
+            "name": "spiritual-leader",
+            "ig_name": "Spiritual Leader",
+            "description": "Effects applied to this unit are also applied to all team units."
+        },
+        {
+            "id": "3",
+            "name": "strong-will",
+            "ig_name": "Strong Will",
+            "description": "Attacks by this unit cannot be weaked."
+        },
+        {
+            "id": "4",
+            "name": "gratitude",
+            "ig_name": "Gratitude",
+            "description": "Whenever this unit is healed, heal 4 damage to the healer."
+        }
+    ]
+}

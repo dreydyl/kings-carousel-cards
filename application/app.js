@@ -15,6 +15,26 @@ var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
 var commentsRouter = require('./routes/comments');
 
+// const request = require('request');
+// const fs = require('fs');
+
+// request({
+//     url: "https://api.apiflash.com/v1/urltoimage",
+//     encoding: "binary",
+//     qs: {
+//         access_key: "1541ee6eb5c347d2bae830729e02ebd2",
+//         url: "https://example.com"
+//     }
+// }, (error, response, body) => {
+//     if (error) {
+//         console.log(error);
+//     } else {
+//         fs.writeFile("screenshot.jpeg", body, "binary", error => {
+//             console.log(error);
+//         });
+//     }
+// });
+
 var app = express();
 
 app.engine(
@@ -27,6 +47,33 @@ app.engine(
         helpers: {
             emptyObject: (obj) => {
                 return !(obj.constructor === Object && Object.keys(obj).length == 0);
+            },
+            strong: (defaultDamage) => {
+                return (defaultDamage == "strong" || defaultDamage == "strong+");
+            },
+            weak: (defaultDamage) => {
+                return (defaultDamage == "weak" || defaultDamage == "weak+");
+            },
+            attackOrHeal: (defaultDamage) => {
+                if(defaultDamage == "strong" || defaultDamage == "weak") return "background-color: #ff00005f; border-color: red;";
+                else if(defaultDamage == "strong+" || defaultDamage == "weak+") return "background-color: #00ff005f; border-color: green;";
+                else return "background-color: #00000055;";
+            },
+            distanceMatches: (dis1, dis2) => {
+                return (dis1 == dis2);
+            },
+            greaterThan: (dis1, dis2) => {
+                return (dis1 > dis2);
+            },
+            getFamilyFilter: (family) => {
+                if(family == "royal") return "#8e7cc347";
+                if(family == "common") return "#4c11304b";
+                if(family == "domesticated") return "#64212c65";
+                if(family == "pirate") return "#1155cc47";
+                if(family == "religious") return "#c9b6373b";
+                if(family == "spiritual") return "#ff99003b";
+                if(family == "wild") return "#7a1d0073";
+                if(family == "ninja") return "#0000003b";
             }
             /**
              * if you need more helpers, add them here

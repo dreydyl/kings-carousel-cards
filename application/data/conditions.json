@@ -1,0 +1,28 @@
+{
+    "Conditions": [
+        {
+            "id": "0",
+            "name": "none",
+            "ig_name": "none",
+            "description": "none"
+        },
+        {
+            "id": "1",
+            "name": "enemies_in_range",
+            "ig_name": "Enemies in Range",
+            "description": "This effect is applied to all enemy units in range."
+        },
+        {
+            "id": "2",
+            "name": "team_in_range",
+            "ig_name": "Team in Range",
+            "description": "This effect is applied to all team units in range."
+        },
+        {
+            "id": "3",
+            "name": "all_in_range",
+            "ig_name": "All in Range",
+            "description": "This effect is applied to all units in range."
+        }
+    ]
+}

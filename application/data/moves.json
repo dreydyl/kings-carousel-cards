@@ -1,0 +1,312 @@
+{
+    "Moves": [
+        {
+            "id": "0",
+            "name": "move_left",
+            "ig_name": "Move Left",
+            "description": "Move this unit 1 space left.",
+            "distance": "1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "0"
+        },
+        {
+            "id": "1",
+            "name": "move_right",
+            "ig_name": "Move Right",
+            "description": "Move this unit 1 space right.",
+            "distance": "-1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "0"
+        },
+        {
+            "id": "2",
+            "name": "move_left",
+            "ig_name": "Move Left",
+            "description": "Move this unit 1 space left.",
+            "distance": "1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "1"
+        },
+        {
+            "id": "3",
+            "name": "move_right",
+            "ig_name": "Move Right",
+            "description": "Move this unit 1 space right.",
+            "distance": "-1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "1"
+        },
+        {
+            "id": "4",
+            "name": "move_left",
+            "ig_name": "Move Left",
+            "description": "Move this unit 1 space left.",
+            "distance": "1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "2"
+        },
+        {
+            "id": "5",
+            "name": "move_right",
+            "ig_name": "Move Right",
+            "description": "Move this unit 1 space right.",
+            "distance": "-1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "2"
+        },
+        {
+            "id": "6",
+            "name": "step_left",
+            "ig_name": "Step Left",
+            "description": "Move this unit 2 spaces left.",
+            "distance": "2",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "2"
+        },
+        {
+            "id": "7",
+            "name": "step_right",
+            "ig_name": "Step Right",
+            "description": "Move this unit 2 spaces right.",
+            "distance": "-2",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "2"
+        },
+        {
+            "id": "8",
+            "name": "move_left",
+            "ig_name": "Move Left",
+            "description": "Move this unit 1 space left.",
+            "distance": "1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "3"
+        },
+        {
+            "id": "9",
+            "name": "move_right",
+            "ig_name": "Move Right",
+            "description": "Move this unit 1 space right.",
+            "distance": "-1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "3"
+        },
+        {
+            "id": "10",
+            "name": "move_left",
+            "ig_name": "Move Left",
+            "description": "Move this unit 1 space left.",
+            "distance": "1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "4"
+        },
+        {
+            "id": "11",
+            "name": "move_right",
+            "ig_name": "Move Right",
+            "description": "Move this unit 1 space right.",
+            "distance": "-1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "4"
+        },
+        {
+            "id": "12",
+            "name": "move_left",
+            "ig_name": "Move Left",
+            "description": "Move this unit 1 space left.",
+            "distance": "1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "5"
+        },
+        {
+            "id": "13",
+            "name": "move_right",
+            "ig_name": "Move Right",
+            "description": "Move this unit 1 space right.",
+            "distance": "-1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "5"
+        },
+        {
+            "id": "14",
+            "name": "step_left",
+            "ig_name": "Step Left",
+            "description": "Move this unit 2 spaces left.",
+            "distance": "2",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "5"
+        },
+        {
+            "id": "15",
+            "name": "step_right",
+            "ig_name": "Step Right",
+            "description": "Move this unit 2 spaces right.",
+            "distance": "-2",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "5"
+        },
+        {
+            "id": "16",
+            "name": "move_left",
+            "ig_name": "Move Left",
+            "description": "Move this unit 1 space left.",
+            "distance": "1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "6"
+        },
+        {
+            "id": "17",
+            "name": "move_right",
+            "ig_name": "Move Right",
+            "description": "Move this unit 1 space right.",
+            "distance": "-1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "6"
+        },
+        {
+            "id": "18",
+            "name": "move_left",
+            "ig_name": "Move Left",
+            "description": "Move this unit 1 space left.",
+            "distance": "1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "7"
+        },
+        {
+            "id": "19",
+            "name": "move_right",
+            "ig_name": "Move Right",
+            "description": "Move this unit 1 space right.",
+            "distance": "-1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "7"
+        },
+        {
+            "id": "20",
+            "name": "move_left",
+            "ig_name": "Move Left",
+            "description": "Move this unit 1 space left.",
+            "distance": "1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "8"
+        },
+        {
+            "id": "21",
+            "name": "move_right",
+            "ig_name": "Move Right",
+            "description": "Move this unit 1 space right.",
+            "distance": "-1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "8"
+        },
+        {
+            "id": "22",
+            "name": "move_left",
+            "ig_name": "Move Left",
+            "description": "Move this unit 1 space left.",
+            "distance": "1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "9"
+        },
+        {
+            "id": "23",
+            "name": "move_right",
+            "ig_name": "Move Right",
+            "description": "Move this unit 1 space right.",
+            "distance": "-1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "9"
+        },
+        {
+            "id": "24",
+            "name": "move_left",
+            "ig_name": "Move Left",
+            "description": "Move this unit 1 space left.",
+            "distance": "1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "10"
+        },
+        {
+            "id": "25",
+            "name": "move_right",
+            "ig_name": "Move Right",
+            "description": "Move this unit 1 space right.",
+            "distance": "-1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "10"
+        },
+        {
+            "id": "26",
+            "name": "move_left",
+            "ig_name": "Move Left",
+            "description": "Move this unit 1 space left.",
+            "distance": "1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "11"
+        },
+        {
+            "id": "27",
+            "name": "move_right",
+            "ig_name": "Move Right",
+            "description": "Move this unit 1 space right.",
+            "distance": "-1",
+            "fk_distance_conditionid": "0",
+            "fk_effectid": "0",
+            "fk_effect_conditionid": "0",
+            "fk_characterid": "11"
+        }
+    ]
+}

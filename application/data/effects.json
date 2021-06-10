@@ -1,0 +1,116 @@
+{
+    "Effects": [
+        {
+            "id": "0",
+            "name": "none",
+            "ig_name": "none",
+            "card_description": "none",
+            "applied_description": "none"
+        },
+        {
+            "id": "1",
+            "name": "bleeding_weak",
+            "ig_name": "Weak Bleeding",
+            "card_description": "Bleeding units lose hp equal to their weak attacks every time they attack. This effect lasts for 6 actions extending into the next round.",
+            "applied_description": "Every time this unit attacks, deal weak damage to itself."
+        },
+        {
+            "id": "2",
+            "name": "bleeding_strong",
+            "ig_name": "Strong Bleeding",
+            "card_description": "Bleeding units lose hp equal to their strong attacks every time they attack. This effect lasts for 6 actions extending into the next round.",
+            "applied_description": "Every time this unit attacks, deal strong damage to itself."
+        },
+        {
+            "id": "3",
+            "name": "bleeding",
+            "ig_name": "Bleeding",
+            "card_description": "Bleeding units lose hp equal to their attacks every time they attack. This effect lasts for 6 actions extending into the next round.",
+            "applied_description": "Every time this unit attacks, deal damage to itself."
+        },
+        {
+            "id": "4",
+            "name": "poison_weak",
+            "ig_name": "Weak Poison",
+            "card_description": "Poisoned units lose hp equal to their weak attacks times the distance they move (up to 3 spaces). This effect lasts for 6 actions extending into the next round.",
+            "applied_description": "Every time this unit moves, deal weak damage times the distance it moves to itself."
+        },
+        {
+            "id": "5",
+            "name": "poison_strong",
+            "ig_name": "Strong Poison",
+            "card_description": "Poisoned units lose hp equal to their strong attacks times the distance they move (up to 3 spaces). This effect lasts for 6 actions extending into the next round.",
+            "applied_description": "Every time this unit moves, deal weak damage times the distance it moves (up to 3 spaces) to itself."
+        },
+        {
+            "id": "6",
+            "name": "blindness_weak",
+            "ig_name": "Weak Blindness",
+            "card_description": "Blind units deal weak damage to ALL units in range of their attacks. This effect lasts for 6 actions extending into the next round.",
+            "applied_description": "Every time this unit attacks, apply weak damage to enemy units and team units in range."
+        },
+        {
+            "id": "7",
+            "name": "blindness_strong",
+            "ig_name": "Strong Blindness",
+            "card_description": "Blind units deal strong damage to ALL units in range of their attacks. This effect lasts for 6 actions extending into the next round.",
+            "applied_description": "Every time this unit attacks, apply strong damage to enemy units and team units in range."
+        },
+        {
+            "id": "8",
+            "name": "blindness",
+            "ig_name": "Blindness",
+            "card_description": "Damage of attacks from blind units is dealt to ALL units in range. This effect lasts for 6 actions extending into the next round.",
+            "applied_description": "Every time this unit attacks, apply strong damage to enemy units and team units in range."
+        },
+        {
+            "id": "9",
+            "name": "paralysis_weak",
+            "ig_name": "Weak Paralysis",
+            "card_description": "Attack cards of weakly paralyzed units are disabled. This effect lasts for number of actions less than 5 given by attacker.",
+            "applied_description": "Attack cards of this unit are disabled."
+        },
+        {
+            "id": "10",
+            "name": "paralysis_strong",
+            "ig_name": "Strong Paralysis",
+            "card_description": "Attack cards of strongly paralyzed units are disabled. This effect lasts for number of actions greater than 4 given by attacker.",
+            "applied_description": "Attack cards of this unit are disabled."
+        },
+        {
+            "id": "11",
+            "name": "freeze_weak",
+            "ig_name": "Weak Freeze",
+            "card_description": "Move cards of weakly frozen units are disabled. This effect lasts for number of actions less than 5 given by attacker.",
+            "applied_description": "Move cards of this unit are disabled."
+        },
+        {
+            "id": "12",
+            "name": "freeze_strong",
+            "ig_name": "Strong Freeze",
+            "card_description": "Move cards of strongly frozen units are disabled. This effect lasts for number of actions greater than 4 given by attacker.",
+            "applied_description": "Move cards of this unit are disabled."
+        },
+        {
+            "id": "13",
+            "name": "add_specific_card",
+            "ig_name": "Add Specific Card",
+            "card_description": "Place specified card on top of activated card's play space.",
+            "applied_description": "none"
+        },
+        {
+            "id": "14",
+            "name": "add_any_card",
+            "ig_name": "Add Any Card",
+            "card_description": "Place specified card on top of activated card's play space.",
+            "applied_description": "none"
+        },
+        {
+            "id": "15",
+            "name": "exposure",
+            "ig_name": "Exposure",
+            "card_description": "Exposed units instantly die if their hp drops below a certain threshold during this action.",
+            "applied_description": "If this units hp drops below a certain threshold during this turn, this unit dies."
+        }
+    ]
+}
